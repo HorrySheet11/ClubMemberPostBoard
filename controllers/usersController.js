@@ -1,6 +1,5 @@
 const query = require("../db/queries");
 const bcrypt = require("bcrypt");
-const {body, validationResult, matchedData} = require("express-validator");
 
 async function login(req, res) {
 	res.render("index", {
@@ -42,10 +41,20 @@ async function logout(req, res, next) {
   });
 }
 
+async function home(req, res) {
+  res.render("home", {
+    title: "Home",
+    user: req.user,
+    posts: await query.getAllPostsAndAuthor(),
+  });
+
+}
+
 
 module.exports = {
 	login,
   logout,
 	signUpGet,
   signUpPost,
+  home
 };

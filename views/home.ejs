@@ -3,9 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club Posts</title>
+  <title><%= title %></title>
 </head>
 <body>
-  
+  <h1><%= title %></h1>
+    <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user.firstname %> <%= user.lastname %> <br>Status: <%= user.status %></h1>
+    <a href="/log-out">LOG OUT</a>
+
+    <h2>Posts</h2>  
+    <a href="/createPost"><button type="button">Create Post</button></a>
+
+    <ul>
+      
+        <% posts.forEach((post) => { %>
+          <li>
+            <h2><a href=""><%= post.title %></a></h2>
+            <p>From: <%= post.firstname %> <p%= post.lastname %></p>
+            <p>Created: <p%= post.created %></p>
+            <h3><%= post.message %></>
+          </li>
+        <% }) %>
+      
+    </ul>
+  <% } else { %>
+    <a href="/sign-up">SIGN UP</a>
+    <a href="/log-in">LOG IN</a>
+  <% } %>
 </body>
 </html>

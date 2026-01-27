@@ -4,13 +4,24 @@ const session = require("express-session");
 const passport = require("passport");
 const routes = require("./routers/usersRouter");
 require("./config/passport");
+const pgSession = require("connect-pg-simple")(session);
+const pgPool = require("./db/pool");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 app.use(
-  session({ secret: "secretttt", resave: false, saveUninitialized: false }),
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+		store: new pgSession({
+			pool: pgPool,
+			tableName: "member_sessions",
+      createTableIfMissing: true, 
+		}),
+		cookie: { maxAge: 1000 * 60 * 60 * 24 },
+	}),
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -28,5 +39,3 @@ app.listen(port, (error) => {
 	}
 	console.log(`app listening on port 	${port}!`);
 });
-
-

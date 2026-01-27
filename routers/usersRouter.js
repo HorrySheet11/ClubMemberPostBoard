@@ -17,9 +17,10 @@ userRouter.get("/log-out", userController.logout);
 userRouter.post(
 	"/log-in",
 	passport.authenticate("local", {
-		successRedirect: "/",
+		successRedirect: "/home",
 		failureRedirect: "/",
 	}),
 );
+userRouter.get('/home', userController.home);
 
 module.exports = userRouter;
