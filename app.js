@@ -21,12 +21,12 @@ app.use((req, res, next) => {
 	next();
 });
 app.use("/", routes);
-
-app.listen(4000, (error) => {
+const port = process.env.PORT || 3000;
+app.listen(port, (error) => {
 	if (error) {
 		throw error;
 	}
-	console.log("app listening on port 3000!");
+	console.log(`app listening on port 	${port}!`);
 });
 
 
