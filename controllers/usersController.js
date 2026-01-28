@@ -2,8 +2,8 @@ const query = require("../db/queries");
 const bcrypt = require("bcrypt");
 
 async function login(req, res) {
-	res.render("index", {
-		title: "Home",
+	res.render("log-in", {
+		title: 'Log-in',
 		user: req.user,
 	});
 }
@@ -25,7 +25,7 @@ async function signUpPost(req, res, next) {
       req.body.status,
       hashedPassword
     )
-		res.redirect("/");
+		res.redirect("/log-in");
 	} catch (error) {
 		console.error(error);
 		next(error);
@@ -42,7 +42,7 @@ async function logout(req, res, next) {
 }
 
 async function home(req, res) {
-  res.render("home", {
+  res.render("index", {
     title: "Home",
     user: req.user,
     posts: await query.getAllPostsAndAuthor(),
@@ -58,7 +58,7 @@ async function createPost(req, res) {
 
 async function createPostPost(req, res) {
   const add = await query.createPost(req.body.title, req.body.message, req.user.member_id);
-  res.redirect('/home')
+  res.redirect('/')
 }
 
 module.exports = {

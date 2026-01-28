@@ -1,5 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const AnonymousStrategy = require('passport-anonymous').Strategy;
 const bcrypt = require("bcrypt");
 const pool = require("../db/pool");
 
@@ -34,6 +35,8 @@ passport.use(
 		},
 	),
 );
+
+passport.use(new AnonymousStrategy());
 
 passport.serializeUser((user, done) => {
 	done(null, user.member_id);

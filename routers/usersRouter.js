@@ -5,7 +5,8 @@ const passport = require("passport");
 const { body } = require("express-validator");
 const { isAuth } = require("./authenticator");
 
-userRouter.get("/", isAuth, userController.login);
+userRouter.get('/', passport.authenticate(['local','anonymous']), userController.home);
+userRouter.get("/log-in", userController.login);
 userRouter.get("/sign-up", userController.signUpGet);
 userRouter.post(
 	"/sign-up",
@@ -18,11 +19,10 @@ userRouter.get("/log-out", userController.logout);
 userRouter.post(
 	"/log-in",
 	passport.authenticate("local", {
-		successRedirect: "/home",
+		successRedirect: "/",
 		failureRedirect: "/",
 	}),
 );
-userRouter.get('/home', isAuth, userController.home);
 userRouter.get('/createPost', isAuth, userController.createPost);
 userRouter.post('/createPost', isAuth, userController.createPostPost);
 
