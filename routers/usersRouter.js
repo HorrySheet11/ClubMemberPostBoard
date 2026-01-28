@@ -20,7 +20,8 @@ userRouter.post(
 	"/log-in",
 	passport.authenticate("local", {
 		successRedirect: "/",
-		failureRedirect: "/",
+		failureRedirect: "/log-in",
+    failureFlash: true
 	}),
 );
 userRouter.get('/createPost', isAuth, userController.createPost);

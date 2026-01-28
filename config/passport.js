@@ -20,11 +20,14 @@ passport.use(
 					[firstname, lastname, username],
 				);
 				const user = rows[0];
+        req.session.messages = [];
 				if (!user) {
-					return done(null, false, { message: "Incorrect first or last name" });
+          // req.flash("error", "Incorrect first or last name");
+					return done(null, false, { message: "Incorrect first, last name or email" });
 				}
 				const match = await bcrypt.compare(password, user.password);
 				if (!match) {
+          // req.flash("error", "Incorrect password");
 					return done(null, false, { message: "Incorrect password" });
 				}
 				return done(null, user);

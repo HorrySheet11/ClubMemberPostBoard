@@ -6,6 +6,7 @@ const routes = require("./routers/usersRouter");
 require("./config/passport");
 const pgSession = require("connect-pg-simple")(session);
 const pgPool = require("./db/pool");
+const flash = require('connect-flash')
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +26,12 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.error_msg = req.flash('error');
+  res.locals.success_msg = req.flash('success');
+  next();
+});
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
 	console.log(req.session);

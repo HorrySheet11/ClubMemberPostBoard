@@ -5,10 +5,13 @@
   <title>Log In</title>
 </head>
 <body>
+  <% if (error_msg.length > 0) { %>
+    <h1><%= error_msg %></h1>
+  <% } %>
   <% if (locals.user) {%>
     <script>window.location.href="/"</script>
   <% } else { %>
-    <h1>please log in</h1>
+    <h1>Log in</h1>
     <form action="/log-in" method="POST">
       <label for="firstname">First name</label><br>
       <input id="firstname" name="firstname" placeholder="firstname" type="text" required /><br>
