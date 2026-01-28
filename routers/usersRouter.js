@@ -3,8 +3,9 @@ const userRouter = Router();
 const userController = require("../controllers/usersController");
 const passport = require("passport");
 const { body } = require("express-validator");
+const { isAuth } = require("./authenticator");
 
-userRouter.get("/", userController.login);
+userRouter.get("/", isAuth, userController.login);
 userRouter.get("/sign-up", userController.signUpGet);
 userRouter.post(
 	"/sign-up",
@@ -21,6 +22,8 @@ userRouter.post(
 		failureRedirect: "/",
 	}),
 );
-userRouter.get('/home', userController.home);
+userRouter.get('/home', isAuth, userController.home);
+userRouter.get('/createPost', isAuth, userController.createPost);
+userRouter.post('/createPost', isAuth, userController.createPostPost);
 
 module.exports = userRouter;

@@ -20,6 +20,7 @@
       <option id="bronze" value="Bronze" hidden>Bronze</option>
       <option id="silver" value="Silver" hidden>Silver</option>
       <option id="gold" value="Gold" hidden>Gold</option>
+      <option id="admin" value="Admin" hidden>Admin</option>
     </select><br>
     <button type="button" onclick="clubStatus()">Club verify</button><br>
     <label for="password">Password</label><br>
@@ -49,6 +50,12 @@
         status.value = 'Gold';
         alert('You are a gold member of the club!');
         break;
+      case 'secretAdmin':
+        status.value = 'Admin';
+        alert('You are an admin of the club!');
+        break;
+      default:
+        alert('You are not a member of the club!');
     }
   }
   

@@ -5,7 +5,9 @@
   <title>Log In</title>
 </head>
 <body>
-
+  <% if (locals.user) {%>
+    <script>window.location.href="/home"</script>
+  <% } else { %>
     <h1>please log in</h1>
     <form action="/log-in" method="POST">
       <label for="firstname">First name</label><br>
@@ -18,7 +20,7 @@
       <input id="password" name="password" type="password" required /><br><br>
       <button type="submit">Log In</button>
     </form>
-
+  <% } %>
     <a href="/sign-up">Sign up</a>
 </body>
 </html>

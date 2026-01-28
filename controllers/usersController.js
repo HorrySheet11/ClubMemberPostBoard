@@ -47,14 +47,26 @@ async function home(req, res) {
     user: req.user,
     posts: await query.getAllPostsAndAuthor(),
   });
-
 }
 
+async function createPost(req, res) {
+  res.render("createPost", {
+    title: "Create Post",
+    user: req.user,
+  });
+}
+
+async function createPostPost(req, res) {
+  const add = await query.createPost(req.body.title, req.body.message, req.user.member_id);
+  res.redirect('/home')
+}
 
 module.exports = {
 	login,
   logout,
 	signUpGet,
   signUpPost,
-  home
+  home,
+  createPost,
+  createPostPost,
 };

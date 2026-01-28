@@ -15,7 +15,16 @@ async function getAllPostsAndAuthor() {
   console.log(rows);
 	return rows;
 }
+
+async function createPost(title, message, member_id) {
+  const result = await pool.query(
+    "INSERT INTO posts (title, message, member_id) VALUES ($1, $2, $3)",
+    [title, message, member_id],
+  );
+  return result;
+}
 module.exports = {
 	signUp,
   getAllPostsAndAuthor,
+  createPost,
 };
