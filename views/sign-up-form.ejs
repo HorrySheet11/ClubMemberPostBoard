@@ -3,6 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign Up</title>
+  <style>
+    #isAdminDisabled:disabled {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #333; 
+        background-color: #fff;
+        opacity: 1; 
+        cursor: default;
+        position: relative;
+    }
+    #isAdminDisabled:disabled:checked::after {
+        content: '✔';
+        position: absolute;
+        top: -2px;
+        left: 2px;
+        color: #000; 
+        font-size: 12px;
+    }
+  </style>
 </head>
 <body>
   <h1>Sign Up</h1>
@@ -14,15 +35,20 @@
     <label for="email">Email</label><br>
     <input type="email" name="email" id="email" placeholder="email" required><br>
     <label for="club-code">Club Code</label><br>
-    <input id="club-code" name="club-code" type="text" required />
+    <input id="club-code" name="club-code" type="password" required />
     <select name="status" id="status" >
       <option value="" disabled hidden selected>enter club code</option>
       <option id="bronze" value="Bronze" hidden>Bronze</option>
       <option id="silver" value="Silver" hidden>Silver</option>
       <option id="gold" value="Gold" hidden>Gold</option>
-      <option id="admin" value="Admin" hidden>Admin</option>
     </select><br>
     <button type="button" onclick="clubStatus()">Club verify</button><br>
+    <label for="admin-code">Admin Code</label><br>
+    <input id="admin-code" name="admin-code" type="password"/>
+    <label for="isAdmin">Admin: </label>
+    <input type="checkbox" id="isAdminDisabled" disabled><br>
+    <input type="checkbox" name="isAdmin" id='isAdminHidden' hidden>
+    <button type="button" onclick="adminVerify()">Club verify</button><br>
     <label for="password">Password</label><br>
     <input id="password" name="password" type="password" required /><br>
     <label for="passwordConfirmation">Confirm Password</label><br>
@@ -50,14 +76,20 @@
         status.value = 'Gold';
         alert('You are a gold member of the club!');
         break;
-      case 'secretAdmin':
-        status.value = 'Admin';
-        alert('You are an admin of the club!');
-        break;
+
       default:
         alert('You are not a member of the club!');
     }
   }
-  
+  const isAdminHidden = document.getElementById('isAdminHidden');
+  const isAdminDisabled = document.getElementById('isAdminDisabled');
+  const adminCode = document.getElementById('admin-code');
+  function adminVerify(){
+    if (adminCode.value === 'secret admin code') {
+      isAdminHidden.checked = true;
+      isAdminDisabled.checked = true;
+      alert('You are an admin of the club!');
+    }
+  }
 </script>
 </html>

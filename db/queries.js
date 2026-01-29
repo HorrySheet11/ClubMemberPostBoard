@@ -1,9 +1,9 @@
 const pool = require("./pool");
 
-async function signUp(firstname, lastname, email, status, password) {
+async function signUp(firstname, lastname, email, status, isAdmin, password) {
 	const result = await pool.query(
-		"INSERT INTO members (firstname, lastname, email, status, password) VALUES ($1, $2, $3, $4, $5)",
-		[firstname, lastname, email, status, password],
+		"INSERT INTO members (firstname, lastname, email, status, password, is_admin) VALUES ($1, $2, $3, $4, $5,$6)",
+		[firstname, lastname, email, status, password, isAdmin],
 	);
 	return result;
 }
@@ -16,10 +16,10 @@ async function getAllPostsAndAuthor() {
 	return rows;
 }
 
-async function createPost(title, message, member_id) {
+async function createPost(title, message, member_id, is_admin) {
   const result = await pool.query(
-    "INSERT INTO posts (title, message, member_id) VALUES ($1, $2, $3)",
-    [title, message, member_id],
+    "INSERT INTO posts (title, message, member_id, is_admin) VALUES ($1, $2, $3, $4)",
+    [title, message, member_id, is_admin],
   );
   return result;
 }

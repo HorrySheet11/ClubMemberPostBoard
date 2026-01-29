@@ -6,36 +6,41 @@
   <title><%= title %></title>
 </head>
 <body>
-  <h1>The Horry Club</h1>
+  <h1>The Horry Club!</h1>
     <% if (locals.user) {%>
-      <h1>WELCOME BACK <%= user.firstname %> <%= user.lastname %> <br>Status: <%= user.status %></h1>
+      <h1>WELCOME BACK <%= user.firstname %> <%= user.lastname %> <br>
+        Status: <%= user.status %> <%= user.is_admin ? "admin" : "member" %>
+        
+      </h1>
       <a href="/log-out">LOG OUT</a>
 
       <h2>Posts</h2>  
       <a href="/createPost"><button type="button">Create Post</button></a>
-
+  <% } else { %>
+    <a href="/sign-up">SIGN UP</a>
+    <a href="/log-in">LOG IN</a>
+  <% } %>
       <ul>
         
           <% posts.forEach((post) => { %>
             <li>
               <h2><a href=""><%= post.title %></a></h2>
-              <p>From: <%= post.firstname %> <p%= post.lastname %></p>
-              <p>Created: <%= post.created %></>
-              <h3><%= post.message %></>
+              <% if (locals.user) {%>
+                <p>From: <%= post.firstname %> <%= post.lastname %></p>
+                <p>Created: <%= post.created %></p>
+              <% } %>
+              <h3> <%= post.message %> </h3>
             </li>
           <% }) %>
         
       </ul>
-    <% } else { %>
-      <a href="/sign-up">SIGN UP</a>
-      <a href="/log-in">LOG IN</a>
-
-      <% posts.forEach((post) => { %>
+    
+      <!-- <% posts.forEach((post) => { %>
             <li>
               <h2><a href=""><%= post.title %></a></h2>
               <h3><%= post.message %></>
             </li>
-          <% }) %>
-    <% } %>
+          <% }) %> -->
+    
 </body>
 </html>

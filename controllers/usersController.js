@@ -18,11 +18,13 @@ async function signUpPost(req, res, next) {
 	try {
 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
     console.log(req.body);
+    const admin = req.body.isAdmin === 'on';
     await query.signUp(
       req.body.firstname,
       req.body.lastname,
       req.body.email,
       req.body.status,
+      admin,
       hashedPassword
     )
 		res.redirect("/log-in");
@@ -57,7 +59,7 @@ async function createPost(req, res) {
 }
 
 async function createPostPost(req, res) {
-  const add = await query.createPost(req.body.title, req.body.message, req.user.member_id);
+  const add = await query.createPost(req.body.title, req.body.message, req.user.member_id, req.body.isAdmin);
   res.redirect('/')
 }
 

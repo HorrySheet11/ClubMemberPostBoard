@@ -6,7 +6,7 @@
 </head>
 <body>
   <% if (error_msg.length > 0) { %>
-    <h1><%= error_msg %></h1>
+    <h1 style="color: red; font-weight: bolder;"><%= error_msg %></h1>
   <% } %>
   <% if (locals.user) {%>
     <script>window.location.href="/"</script>

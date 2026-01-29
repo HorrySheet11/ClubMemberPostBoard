@@ -14,6 +14,7 @@ passport.use(
 		async (req, username, password, done) => {
 			const firstname = req.body.firstname;
 			const lastname = req.body.lastname;
+      
 			try {
 				const { rows } = await pool.query(
 					"SELECT * FROM members WHERE firstname = $1 and lastname = $2 and email = $3",
