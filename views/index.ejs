@@ -24,23 +24,15 @@
         
           <% posts.forEach((post) => { %>
             <li>
-              <h2><a href=""><%= post.title %></a></h2>
+              <h2><a href=""><%= post.title %></a></h2> 
               <% if (locals.user) {%>
+                <% if(user.is_admin){%><a href="/delete/<%= post.post_id %>"><button>Delete</button></a><% }%>
                 <p>From: <%= post.firstname %> <%= post.lastname %></p>
                 <p>Created: <%= post.created %></p>
               <% } %>
               <h3> <%= post.message %> </h3>
             </li>
           <% }) %>
-        
       </ul>
-    
-      <!-- <% posts.forEach((post) => { %>
-            <li>
-              <h2><a href=""><%= post.title %></a></h2>
-              <h3><%= post.message %></>
-            </li>
-          <% }) %> -->
-    
 </body>
 </html>

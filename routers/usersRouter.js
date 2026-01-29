@@ -26,5 +26,6 @@ userRouter.post(
 );
 userRouter.get('/createPost', isAuth, userController.createPost);
 userRouter.post('/createPost', isAuth, userController.createPostPost);
+userRouter.get('/delete/:id', isAuth, userController.deletePost);
 
 module.exports = userRouter;

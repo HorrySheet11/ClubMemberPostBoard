@@ -16,10 +16,18 @@ async function getAllPostsAndAuthor() {
 	return rows;
 }
 
-async function createPost(title, message, member_id, is_admin) {
+async function createPost(title, message, member_id) {
   const result = await pool.query(
-    "INSERT INTO posts (title, message, member_id, is_admin) VALUES ($1, $2, $3, $4)",
-    [title, message, member_id, is_admin],
+    "INSERT INTO posts (title, message, member_id) VALUES ($1, $2, $3)",
+    [title, message, member_id],
+  );
+  return result;
+}
+
+async function deletePost(post_id){
+  const result = await pool.query(
+    "DELETE FROM posts WHERE post_id = $1",
+    [post_id],
   );
   return result;
 }
@@ -27,4 +35,5 @@ module.exports = {
 	signUp,
   getAllPostsAndAuthor,
   createPost,
+  deletePost,
 };

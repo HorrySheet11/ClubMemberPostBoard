@@ -63,6 +63,11 @@ async function createPostPost(req, res) {
   res.redirect('/')
 }
 
+async function deletePost(req,res){
+  const deletePost = await query.deletePost(req.params.id);
+  res.redirect('/')
+}
+
 module.exports = {
 	login,
   logout,
@@ -71,4 +76,5 @@ module.exports = {
   home,
   createPost,
   createPostPost,
+  deletePost
 };
