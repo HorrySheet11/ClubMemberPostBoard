@@ -12,7 +12,6 @@ async function getAllPostsAndAuthor() {
 	const {rows} = await pool.query(
 		"select post_id, title, message, created, p.member_id, firstname, lastname from posts as p join members as m on m.member_id = p.member_id;",
 	);
-  console.log(rows);
 	return rows;
 }
 

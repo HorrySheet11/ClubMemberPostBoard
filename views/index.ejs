@@ -21,7 +21,6 @@
     <a href="/log-in">LOG IN</a>
   <% } %>
       <ul>
-        
           <% posts.forEach((post) => { %>
             <li>
               <h2><a href=""><%= post.title %></a></h2> 
@@ -32,6 +31,7 @@
               <% } %>
               <h3> <%= post.message %> </h3>
             </li>
+            <hr>
           <% }) %>
       </ul>
 </body>

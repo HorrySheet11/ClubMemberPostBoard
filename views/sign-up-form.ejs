@@ -35,10 +35,9 @@
     <label for="email">Email</label><br>
     <input type="email" name="email" id="email" placeholder="email" required><br>
     <label for="club-code">Club Code</label><br>
-    <input id="club-code" name="club-code" type="password" required />
+    <input id="club-code" name="club-code" type="password" placeholder="Enter club code"/>
     <select name="status" id="status" >
-      <option value="" disabled hidden selected>enter club code</option>
-      <option id="bronze" value="Bronze" hidden>Bronze</option>
+      <option id="bronze" value="Bronze" selected>Bronze</option>
       <option id="silver" value="Silver" hidden>Silver</option>
       <option id="gold" value="Gold" hidden>Gold</option>
     </select><br>
@@ -61,11 +60,6 @@
   const clubCode = document.getElementById('club-code');
   function clubStatus() {
     switch (clubCode.value) {
-      case 'secret bronze code':
-        document.getElementById('bronze').hidden = false;
-        status.value = 'Bronze';
-        alert('You are a bronze member of the club!');
-        break;
       case 'secret silver code':
         document.getElementById('silver').hidden = false;
         status.value = 'Silver';
@@ -77,8 +71,6 @@
         alert('You are a gold member of the club!');
         break;
 
-      default:
-        alert('You are not a member of the club!');
     }
   }
   const isAdminHidden = document.getElementById('isAdminHidden');

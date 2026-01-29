@@ -33,11 +33,11 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-	console.log(req.session);
-	console.log(req.user);
-	next();
-});
+// app.use((req, res, next) => {
+// 	console.log(req.session);
+// 	console.log(req.user);
+// 	next();
+// });
 app.use("/", routes);
 const port = process.env.PORT || 3000;
 app.listen(port, (error) => {

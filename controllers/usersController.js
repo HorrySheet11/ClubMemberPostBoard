@@ -17,7 +17,7 @@ async function signUpGet(req, res) {
 async function signUpPost(req, res, next) {
 	try {
 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    console.log(req.body);
+    // console.log(req.body);
     const admin = req.body.isAdmin === 'on';
     await query.signUp(
       req.body.firstname,
